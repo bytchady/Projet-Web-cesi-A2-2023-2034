@@ -1,0 +1,151 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Modifier une offre{% endblock title %}
+
+
+
+{% block body %}
+<form id="EditOffer_Form" action="{{ url_for('Modifier-une-offre', {'offerId': offerId}) }}" method="POST">
+
+    <div  style=" height: 40px" class="card border-0"></div>
+<div  class="container ">
+    <div class="row align-items-center   ">
+        <div class="col-12">
+            <p  class="fs-1 text-center mt-5 mb-5">Modifier une offre</p>
+        </div>
+    </div>
+</div>
+
+
+    <div  class="container">
+        <div class="row  ">
+            <div class="col-5 col-ml-3">
+                <div id="successMessage" class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3" style="display: none;"></div>
+                <div id="errorMessage" class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" style="display: none;"></div>
+            </div>
+        </div>
+    </div>
+
+<div  class="container">
+    <div class="row  ">
+        <div class="col  ">
+            <div  style="background-color: #28587B;height: 5px" class="card ">
+            </div>
+        </div>
+
+    </div>
+</div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6">
+                <label for="Entreprise">Entreprise</label>
+                <input id="Entreprise" name="Entreprise" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Entreprise" aria-label="Entreprise" readonly value="{{ company }}">
+            </div>
+
+            <div class="col-12 col-sm-6">
+                <label for="Adresse">Adresse</label>
+                <input id="Adresse" name="Adresse" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Adresse" aria-label="Adresse" readonly value="{{ address }}">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6">
+                <label for="Description">Description</label>
+                <input id="Description" name="Description" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Description" aria-label="Description" value="{{ description }}">
+            </div>
+            <div class="col-12 col-sm-6">
+                <label for="Promotion">Type de promotion concernées</label>
+                <input id="Promotion" name="Promotion" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Type de promotion concernées" aria-label="Type de promotion concernées" value="{{ promotion }}">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6">
+                <label for="Durée">Durée du stage</label>
+                <input id="Durée" name="Durée" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Durée du stage" aria-label="Durée du stage" value="{{ duration }}">
+            </div>
+            <div class="col-12 col-sm-6">
+                <label for="Date">Date de l'offre</label>
+                <input id="Date" name="Date" type="date" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Date de l'offre" aria-label="Date de l'offre" value="{{ date | date('Y-m-d') }}">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12 col-sm-6">
+                <label for="Remuneration">Base de rémuneration</label>
+                <input id="Remuneration" name="Remuneration" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Base de rémuneration" aria-label="Base de rémuneration" value="{{ remuneration }}">
+            </div>
+            <div class="col-12 col-sm-6">
+                <label for="Place">Nombre de place offerte au étudiant</label>
+                <input id="Place" name="Place" type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Nombre de place offerte au étudiant" aria-label="Nombre de place offerte au étudiant" value="{{ places }}">
+            </div>
+        </div>
+    </div>
+<div  class="container ">
+    <div class="row mb-2">
+    <div class="col">
+        <div class="card overflow-auto mt-1 mb-2" style="height: 300px">
+            <table class="table  table-hover text-center mb-2">
+                <thead>
+                <tr>
+                    <th scope="col">Compétences necessaires</th>
+                </tr>
+                </thead>
+
+                <tbody class="table-group-divider">
+                {% for skill in skills %}
+                    <tr id="adresse-row-{{ skill.getIdSkill() }}"  data-bs-toggle="modal" data-bs-target="#orderModal">
+                        <td> {{ skill.getNameSkill() }}</td>
+                        <td>
+                            <button class="btn btn-secondary delete-skill-btn" type="button" data-id="{{ skill.getIdSkill() }}">
+                                <img src="/Bootstrap/images/bx-trash.svg" alt="supprimer">
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <button type="button" class="btn btn-outline-secondary w-100 rounded-pill mt-2 mb-2" id="custom">Ajouter des compétences supplémentaires</button>
+                </div>
+            </div>
+        </div>
+        <div class="container" id="additionalSkillContainer"></div>
+    </div>
+</div>
+    <div class="container ">
+        <div class="row ">
+            <div class="col ">
+                <div style="background-color: #28587B; height: 5px" class="card ">
+                </div>
+            </div>
+        </div>
+    </div>
+<div  class="container ">
+    <div class="row mt-2">
+        <div class="col-4  ">
+            <button id="Cancel_Btn" style="background-color: #28587B" type="button" class="btn btn-outline-light  rounded-pill ">Annuler</button>
+        </div>
+        <div class="col-4  text-end">
+            <button id="Delete_Btn" style="background-color:red" type="button" class="btn btn-outline-light  rounded-pill ">Supprimer</button>
+        </div>
+        <div class="col-4  text-end ">
+            <button id="Submit_Btn" style="background-color: #28587B" type="submit" class="btn btn-outline-light  rounded-pill ">Modifier</button>
+        </div>
+    </div>
+</div>
+<div style=" height: 100px" class="card border-0"></div>
+</form>
+{% endblock body %}
+
+{% block script %}
+    <script src="/Script/EditOffer.js"></script>
+{% endblock script %}

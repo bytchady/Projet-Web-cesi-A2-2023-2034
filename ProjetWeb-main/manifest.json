@@ -1,0 +1,26 @@
+{
+  "name": "FindMe",
+  "short_name": "FM",
+  "start_url": "http://findme.fr/Page-d-accueil?page=1",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white",
+  "orientation": "landscape-primary",
+  "icons": [
+    {
+      "src": "public/Bootstrap/images/logo 192192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "public/Bootstrap/images/logo 512512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "public/Bootstrap/images/logo_noir.png",
+      "type": "image/png",
+      "sizes": "552x435"
+    }
+  ]
+}

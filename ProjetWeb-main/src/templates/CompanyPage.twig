@@ -1,0 +1,126 @@
+{% extends 'partials/Base.twig' %}
+{% import "partials/Star.twig" as Startwig %}
+{% import "partials/Card.twig" as Card %}
+
+{% block title %}Entreprise{% endblock title %}
+
+{% block body %}
+    <div class="container">
+        <div  style=" height: 40px" class="card border-0">
+        </div>
+        <div class="row">
+            <div class="card mb-3 border-0">
+                <div class="row">
+                    <div class="col-4 col-md-3 col-lg-2">
+                        <img src="{{ company.getLogoPath() is not null ? company.getLogoPath : '/Bootstrap/images/LogoEntreprise/Logo-par-defaut.jpg' }}" class="img-fluid rounded-start" alt="{{ entreprise.name }}">
+                    </div>
+                    <div class="col-8 col-md-4 col-lg-5 align-self-center">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ company.getNameCompany() }}</h5>
+                            <p class="card-text">{{ company.getBusinessSector() }}</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-5 col-lg-5 align-self-end text-end">
+                        {% if userType != 'Etudiant' %}
+                        <a href="/Entreprise/Modifier/{{ company.getIdCompany() }}/{{ company.getNameCompany()|url_encode }}" class="btn btn-primary me-2">Modifier</a>
+                        {% endif %}
+                        <a href="/Stat-Entreprise" class="btn btn-primary">Voir les statistiques</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div style="background-color: #28587B; height: 5px" class="card"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="row mt-3 ms-0">
+                    <h5>Evaluation</h5>
+                    {% if averageRating is defined %}
+                        Rating moyen : {{ averageRating }}
+                    {% else %}
+                        Aucune évaluation disponible.
+                    {% endif %}
+
+                </div>
+
+                <div class="col-12 ms-2">
+                    {{ Startwig.content(id) }}
+                </div>
+                <input type="hidden" name="note" id="note" value="0">
+                <script src="/Script/Stars.js"></script>
+                <div class="row mt-4">
+                    <div class="col">
+                        <div style="background-color: #28587B; height: 5px" class="card"></div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-6">
+                        <h3>Localités</h3>
+                    </div>
+                </div>
+
+                {% for adresse in adresses %}
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <div style="background-color: #28587B; height: 5px" class="card"></div>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-6">
+                            <h5>{{ adresse.getNameCity() }}</h5>
+                            <p style="font-size: small;">
+                                {{ adresse.getNumStreet() }} {{ adresse.getNameStreet() }},
+                                {{ adresse.getAddAdr() }}
+                            </p>
+                            <p style="font-size: small;">
+                                 {{ adresse.getZipcode() }}  {{ adresse.getNameCity() }}
+                            </p>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+            <div class="col-6">
+                <!-- Offres -->
+                <div class="row align-items-center mt-2">
+                    <div class="col-12">
+                        <div style="background-color: #28587B" class="card">
+                            <h5 class="card-header text-center text-light">Offres</h5>
+                        </div>
+                    </div>
+                </div>
+                {% for offer in offers %}
+                    <div class="row mt-3">
+                        <div class="card mb-3">
+                            <div class="row">
+                                <div class="col-5 col-md-3 col-lg-2 align-self-center">
+                                    <img src="{{ company.getLogoPath() is not null ? company.getLogoPath : '/Bootstrap/images/LogoEntreprise/Logo-par-defaut.jpg' }}" class="img-fluid rounded-start w-75 text-center" alt="...">
+                                </div>
+                                <div class="col-7 col-md-4 col-lg-7 align-self-center">
+                                    <div class="card-body">
+                                        <h5 class="card-title">{{ offer.getDescription }}</h5>
+                                        <p class="card-text">{{ company.getNameCompany }}</p>
+                                        <p class="card-text">{{ offer.getDescription }}</p>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-5 col-lg-3 align-self-center">
+                                    <button style="background-color: #28587B" type="button" class="btn btn-outline-light w-100 rounded-pill">{{ offer.getPlaces }} postulants </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock body %}
+

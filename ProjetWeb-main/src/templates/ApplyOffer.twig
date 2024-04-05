@@ -1,0 +1,96 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Postuler{% endblock title %}
+
+
+
+{% block body %}
+<div  class="container mt-3">
+    <div  style=" height: 40px" class="card border-0"></div>
+    <div style="background-color: #c8d9e1; " class="card  shadow" >
+        <div style="background-color: #c8d9e1" class="card mt-2 mb-2 me-2 ms-2  border-0 ">
+            <div class="row  ">
+                <div class=" col-3 col-lg-2  col-xl-1  ">
+                    <div class="card ms-1 ">
+                        <img src="/Bootstrap/images/bxl-tiktok%20(1).svg" class="img-fluid rounded-start border-dark text-center " alt="test">
+                    </div>
+                </div>
+                <div class="col-8 col-lg-10 col-xl-11  ">
+                    <div class="card shadow  mt-1 mb-1">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">This is a wider card with supporting tontent. This content is a little bit longer.</p>
+                            <p class="card-text">This is a wider card with supporting .</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  class="container">
+            <div class="row  ">
+                <div class="col  ">
+                    <div  style="background-color: #28587B;height: 5px" class="card mt-2 ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row  align-items-center">
+            <div class=" col-2 "></div>
+            <div class="col-8 ">
+                <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Nom" aria-label="Nom">
+            </div>
+        </div>
+        <div class="row  align-items-center">
+            <div class=" col-2 "></div>
+            <div class="col-8 ">
+                <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Prenom" aria-label="Prenom">
+            </div>
+        </div>
+        <div class="row  align-items-center">
+            <div class=" col-2 "></div>
+            <div class="col-8 ">
+                <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Email" aria-label="Email">
+            </div>
+        </div>
+        <div class="row  align-items-center">
+            <div class=" col-1"></div>
+            <div class="col-10 ">
+                <div class="custom-file">
+                    <label class="custom-file-label  text-decoration-underline" for="customFile">Import CV :</label>
+                    <input  class="form-control   border-dark  mb-2" type="file" id="customFile" lang="fr">
+                </div>
+            </div>
+        </div>
+        <div class="row  align-items-center">
+            <div class=" col-1"></div>
+            <div class="col-10 ">
+                <div class="custom-file">
+                    <label class="custom-file-label  text-decoration-underline" for="customFile1">Import Lettre de motivation :</label>
+                    <input  class="form-control   border-dark  mb-2" type="file" id="customFile1" lang="fr">
+                </div>
+            </div>
+        </div>
+        <div  class="container">
+            <div class="row  ">
+                <div class="col  ">
+                    <div  style="background-color: #28587B;height: 5px" class="card mt-2 ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div  class="container ">
+            <div class="row">
+                <div class="col-3 col-lg-4">
+                    <button  style="background-color: #28587B"  type="button" class="btn btn-outline-light w-auto rounded-pill mt-3 mb-2  border-0">Annuler</button>
+                </div>
+                <div class="col-6  col-lg-4 text-end">
+                </div>
+                <div class="col-3 col-lg-4 text-end">
+                    <button  style="background-color: #28587B"  type="button" class="btn btn-outline-light w-auto rounded-pill mt-3 mb-2 border-0 ">Postuler</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div  style=" height: 40px" class="card border-0"></div>
+</div>
+{% endblock body %}

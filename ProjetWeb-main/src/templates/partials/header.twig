@@ -1,0 +1,402 @@
+<nav class="navbar navbar-expand-lg" style="background-color:#28587B;">
+    <div class="container-fluid ">
+        <a class="navbar-brand" href="#">
+            <button type="button" class="btn">
+                <img class="head-image" src="/Bootstrap/images/Logo_Blanc.png" alt="Logo" style="max-width: 100%; height: auto;">
+            </button>
+
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <form class="d-flex flex-sm-grow-1">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Rechercher">
+                    <button   class="btn btn-secondary" type="button" data-bs-toggle="modal" data-bs-target="#filterModal">
+                        <img href="{{ url_for('Page-d-accueil') }}" src="/Bootstrap/images/icons8-entonnoir-20.png">
+                    </button>
+                    <button class="btn btn-secondary" type="button">
+                        <img src="/Bootstrap/images/icons8-loupe-22.png">
+                    </button>
+
+
+
+                <div class="dropdown center">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        {% if userTypeCookie != 'Etudiant' %}
+                            <li><a class="dropdown-item" href="/Creer-un-compte">Nouveau compte</a></li>
+                            <li><a class="dropdown-item" href="/Creer-une-entreprise">Nouvelle entreprise</a></li>
+                            <li><a class="dropdown-item" href="/Creer-une-offre">Nouvelle offre</a></li>
+                        {% endif %}
+                        <li><a class="dropdown-item" href="/Offres">Toutes les offres</a></li>
+                        <li><a class="dropdown-item" href="/Compte">Tous les comptes</a></li>
+                        <li><a class="dropdown-item" href="/Page-d-accueil">Page d'accueil</a></li>
+                        <li><a class="dropdown-item " style="background-color: #0d6efd; color: white" href="/Connection"> Deconnexion</a></li>
+                    </ul>
+                </div></div>
+
+                <div class="user-btn ms-auto">
+                    <a href="/Compte/Profil/{{ userIdCookie }}" class="btn"> <img src="/Bootstrap/images/bx-user-circle.svg" ></a>
+
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</nav>
+
+
+{#<div class="container mt-3 m-lg-2">#}
+{#    <div class="col-12 col-sm-6">#}
+{#        <div class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" id="errorMessage" style="margin-top: 20px; margin-left: 15px; display: none;"></div>#}
+{#    </div>#}
+{#</div>#}
+
+
+<div class="modal fade" id="filterModal" tabindex="-1" aria-labelledby="filterModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="filterModalLabel">Filtrer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <!--Offre-->
+                <div class="modal-body" id="Filter1">
+                    <h6 style="color:#28587B";>Offre</h6>
+                        <div class="d-flex flex-wrap">
+                            <!--Compétences-->
+                            <form method="post" action="SkillController.php">
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Skills_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Compétences
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Skills_Dropdown">
+                                    <li>
+                                        <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" class="other-checkbox"> Autre
+                                        </label>
+                                        <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                    </li>
+                                </ul>
+                            </div>
+                            </form>
+                            <!--Localité-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="LocationOffer_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Localité
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="LocationOffer_Dropdown">
+                                    <li>
+                                        <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" class="other-checkbox"> Autre
+                                        </label>
+                                        <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--Entreprise-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Company_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Entreprise
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Company_Dropdown">
+                                    <li>
+                                        <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" class="other-checkbox"> Autre
+                                        </label>
+                                        <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--Promotion-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Promotion_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Promotion
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Promotion_Dropdown">
+                                    <li>
+                                        <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" class="other-checkbox"> Autre
+                                        </label>
+                                        <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--Rémuneration-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Pay_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Rémuneration
+                                </button>
+                                <div class="dropdown-menu p-3" aria-labelledby="Pay_Dropdown">
+                                    <form>
+                                        <div class="mb-3">
+                                            <label for="minAmount" class="form-label">Montant minimal</label>
+                                            <input type="number" class="form-control" id="minAmount" placeholder="Montant minimal">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="maxAmount" class="form-label">Montant maximal</label>
+                                            <input type="number" class="form-control" id="maxAmount" placeholder="Montant maximal">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" id="Pay_Confirm">Appliquer</button>
+                                    </form>
+                                </div>
+                            </div>
+                            <!--Places offertes-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Places_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Places offertes
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Places_Dropdown">
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Places_Option1" data-filter-min="0" data-filter-max="10"> Moins de 10 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Places_Option2" data-filter-min="10" data-filter-max="20"> 10 à 20 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Places_Option3" data-filter-min="20" data-filter-max="30"> 20 à 30 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Places_Option4" data-filter-min="30" data-filter-max="40"> 30 à 40 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Places_Option5" data-filter-min="40"> Plus de 40 personnes
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--Postulants-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Applicants_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Postulants
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Applicants_Dropdown">
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Applicants_Option1" data-filter-min="0" data-filter-max="40"> Moins de 40 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Applicants_Option2" data-filter-min="40" data-filter-max="60"> 40 à 60 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Applicants_Option3" data-filter-min="60" data-filter-max="80"> 60 à 80 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Applicants_Option4" data-filter-min="80" data-filter-max="100"> 80 à 100 personnes
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Applicants_Option5" data-filter-min="100"> Plus de 100 personnes
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--Durée-->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="Duration_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Durée
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="Duration_Dropdown">
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Duration_Option1"> Moins d'un mois
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Duration_Option2"> 1 à 2 mois
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Duration_Option3"> 2 à 3 mois
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Duration_Option4"> 3 à 4 mois
+                                        </label>
+                                    </li>
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" id="Duration_Option5"> Plus de 4 mois
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!-- Date de l'offre -->
+                            <div class="dropdown me-2 mb-2">
+                                <button class="btn btn-secondary dropdown-toggle" type="button" id="OfferDate_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Date de l'offre (Intervalle)
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="OfferDate_Dropdown">
+                                    <li>
+                                        <div class="px-3 py-2">
+                                            <label for="startDate" class="form-label">Début de recherche</label>
+                                            <input type="date" class="form-control" id="startDate">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="px-3 py-2">
+                                            <label for="endDate" class="form-label">Fin de recherche</label>
+                                            <input type="date" class="form-control" id="endDate">
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="px-3 py-2">
+                                            <button class="btn btn-primary" onclick="applyDateFilter()" id="OfferDate_Confirm">Appliquer</button>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                </div>
+
+                <!--Entreprise-->
+                <div class="modal-body" id="Filter2">
+                    <h6 style="color:#28587B">Entreprise</h6>
+                    <div class="d-flex flex-wrap">
+                        <!--Nom-->
+                        <div class="dropdown me-2 mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="Name_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Nom
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="Name_Dropdown">
+                                <li>
+                                    <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" class="other-checkbox"> Autre
+                                    </label>
+                                    <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Localité-->
+                        <div class="dropdown me-2 mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="LocationCompany_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Localité
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="LocationCompany_Dropdown">
+                                <li>
+                                    <input type="text" class="form-control search-input" placeholder="Rechercher...">
+
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" class="other-checkbox"> Autre
+                                    </label>
+                                    <input type="text" class="form-control other-input" style="display: none;" placeholder="Entrez un mot...">
+                                </li>
+                            </ul>
+                        </div>
+                        <!--Evaluation-->
+                        <div class="dropdown me-2 mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="Evaluation_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Evaluation
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="Evaluation_Dropdown">
+                                <li>
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" id="Evaluation_Option1" data-filter-min="0" data-filter-max="1"> Inférieur à 1
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" id="Evaluation_Option2" data-filter-min="1" data-filter-max="2"> 1 à 2
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" id="Evaluation_Option3" data-filter-min="2" data-filter-max="3"> 2 à 3
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" id="Evaluation_Option4" data-filter-min="3" data-filter-max="4"> 3 à 4
+                                    </label>
+                                </li>
+                                <li>
+                                    <label class="dropdown-item">
+                                        <input type="checkbox" id="Evaluation_Option5" data-filter-min="4"> Supérieur à 4
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Compte-->
+                <div class="modal-body" id="Filter3">
+                    <h6 style="color:#28587B">Compte</h6>
+                    <input type="checkbox" id="Is_Pilote"> Pilote de Promo
+                    <div class="d-flex flex-wrap">
+                        <!--Promotion-->
+                        <div class="dropdown me-2 mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="Promotion_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Promotion
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="Promotion_Dropdown">
+                                {% for promotion in promotions %}
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="promotions[]" value="{{ promotion.id }}"> {{ promotion.name }}
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <!--Centre-->
+                        <div class="dropdown me-2 mb-2">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="Center_Dropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Centre
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="Center_Dropdown">
+                                {% for center in centers %}
+                                    <li>
+                                        <label class="dropdown-item">
+                                            <input type="checkbox" name="centers[]" value="{{ center.id }}"> {{ center.name }}
+                                        </label>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!--Footer-->
+                <div class="modal-footer">
+                    <span id="FilterCount">0</span> Filtre(s) appliqué(s)
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="Filter_Confirm" >Valider</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<script src="/Script/FilterApplied.js"></script>

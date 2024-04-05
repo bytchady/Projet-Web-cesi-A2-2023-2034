@@ -1,0 +1,145 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Creer une offre{% endblock title %}
+
+{% block body %}
+    <form id="CreateOffer_Form" action="{{ url_for('Creer-une-offre') }}" method="POST" enctype="multipart/form-data">
+        <template id="template">
+            <div class="input-group mt-1 d-flex justify-content-between ">
+                <input class=" border-0" aria-label="competence" name="competence"  style="outline: none" readonly  >
+                <div class="btn btn-outline-light border-0" style="background-color: #28587B"
+                     onclick="this.parentNode.parentNode.removeChild(this.parentNode)">
+                    X
+                </div>
+            </div>
+        </template>
+
+        <div class="container ">
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <p class="fs-1 text-center mt-5 mb-5">Creer une offre</p>
+                </div>
+
+                <div class="container mt-3 m-lg-2">
+                    <div class="col-12 col-sm-6">
+                        <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3" id="successMessage" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="container mt-3 m-lg-2">
+                    <div class="col-12 col-sm-6">
+                        <div  class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" id="errorMessage" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row  ">
+                <div class="col  ">
+                    <div style="background-color: #28587B;height: 5px" class="card ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-6">
+                    <select id="Entreprise" name="Entreprise" class="form-control rounded-pill mt-2 mb-2 border-dark" aria-label="Entreprise">
+                        <option value="">Sélectionnez une entreprise</option>
+                        {% for company in companies %}
+                            <option value="{{ company.getIdCompany() }}">{{ company.getNameCompany() }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <!-- Ce select sera rempli via AJAX après la sélection d'une entreprise -->
+                <div class="col-12 col-sm-6">
+                    <select id="Adresse" name="Adresse" class="form-control rounded-pill mt-2 mb-2 border-dark" aria-label="Localité">
+                        <option value="">Sélectionnez une adresse</option>
+                        <!-- Les options seront ajoutées par JavaScript -->
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="container ">
+            <div class="row ">
+                <div class="col-12 col-sm-6">
+                    <input id="Promotion" name="Promotion" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Type de promotion concernées" aria-label="Type de promotion concernées">
+                </div>
+                <div class="col-12 col-sm-6">
+                    <input id="Durée" name="Durée" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Durée" aria-label="Durée">
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row  ">
+                <div class="col-12 col-sm-6">
+                    <div class="card border-dark mb-2 mt-2">
+                        <div class="px-3 py-2 ">
+                            <label for="Date" class="form-label text-decoration-underline">Date de l'offre :</label>
+                            <input type="date" class="form-control" id="Date" name="Date">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6">
+                    <input id="Description" name="Description" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Description" aria-label="Description">
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row  align-items-center">
+
+                <div class="col-12 col-sm-6">
+                    <input id="Remuneration" name="Remuneration" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Base de rémuneration" aria-label="Base de rémuneration">
+                </div>
+                <div class="col-12 col-sm-6">
+                    <input id="Place" name="Place" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Nombre de place offerte au étudiant" aria-label="Nombre de place offerte au étudiant">
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row ">
+                <div class="col ">
+                    <div style="background-color: #28587B; height: 5px" class="card ">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 col-sm-6">
+                    <div class="input-group mb-2 mt-2">
+                        <input type="text" class="form-control" id="competencesInput" placeholder="Compétences" aria-label="Compétences" aria-describedby="button-addon2">
+                        <button class="btn btn-outline-secondary" type="button" id="ajouterButton">Ajouter</button>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 mt-2">
+                    <div class="list-group" id="listeCompetences">
+                        <a class="list-group-item list-group-item-action active border-0" aria-current="true"
+                           style="background-color: #28587B">
+                            Liste des Compétences
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container ">
+            <div class="row">
+                <div class="col-4">
+                    <button id="Cancel_Btn" style="background-color: #28587B" type="button"
+                            class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 btn-padding-end">Annuler
+                    </button>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-4">
+                    <button id="Submit_Btn" style="background-color: #28587B" type="submit" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 ">Creer
+                    </button>
+                </div>
+            </div>
+        </div>
+    </form>
+{% endblock body %}
+
+{% block script %}
+    <script src="/Script/CreateOffer.js"></script>
+{% endblock script %}

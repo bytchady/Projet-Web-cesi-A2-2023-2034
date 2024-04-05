@@ -1,0 +1,93 @@
+  {% extends 'partials/Base.twig' %}
+
+{% block title %}Page d'acceuil{% endblock title %}
+
+{% block body %}
+    {{ parent() }}
+<div class="container align-items-center">
+    <div class="row">
+        <div class="col-6 text-md-center">
+            <div class="container mt-5 mb-4">
+                <div class="row"><h1 class="col-md-auto">Bienvenue sur FindMe.fr</h1></div>
+            </div>
+            <div id="carouselExampleCaptions" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+                            aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
+                            aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
+                            aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="Bootstrap/images/Reunion-au-travail.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>FindMe</h5>
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Bootstrap/images/noir qui rit.jpg" class="d-block w-100" alt="...">
+                        <div class="carousel-caption d-none d-md-block">
+                            <p></p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="Bootstrap/images/dos.jpg" class="d-block w-100" alt="...">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions"
+                        data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            <div class="row mt-5">
+                <h5>Bienvenue sur notre site web dédié à la recherche de stages pour les étudiants ambitieux
+                    et motivés ! Notre plateforme a été spécialement conçue pour faciliter la mise en
+                    relation entre les entreprises proposant des opportunités de stage et les étudiants à la
+                    recherche d'une expérience professionnelle enrichissante.
+                    N'hésitez pas à explorer notre site et à vous inscrire gratuitement pour accéder à toutes
+                    nos offres de stages. Nous sommes convaincus que votre prochaine expérience
+                    professionnelle enrichissante vous attend déjà ici !</h5>
+            </div>
+        </div>
+        <div class="col-6 text-md-center">
+            <div class="container mt-5 ">
+                <div class="row">
+                    <div class="col-md-auto"><h3><strong>Liste des entreprises</strong></h3></div>
+                </div>
+            </div>
+            <div class="container mt-3 mb-3">
+                <div class="row">
+                    {% for entreprise in entreprises %}
+                    <div class="col-sm-4 mb-3 mb-sm-0 d-flex align-items-stretch"> <!-- Utilisez d-flex et align-items-stretch pour des hauteurs égales -->
+                        <div class="card mt-3 mb-5" style="width: 100%;"> <!-- Utilisez width: 100% pour que la carte remplisse le div.col -->
+                            <img src="{{ entreprise.logoPath ? entreprise.logoPath : '/Bootstrap/images/LogoEntreprise/Logo-par-defaut.jpg' }}" class="card-img-top" alt="{{ entreprise.nom }}" style="height: 150px; object-fit: contain; background: #FFF;"> <!-- Hauteur fixe et object-fit pour l'image -->
+                            <div class="card-body d-flex flex-column"> <!-- Utilisez flex-column pour organiser le contenu de la carte en colonne -->
+                                <h5 class="card-title mb-auto">{{ entreprise.nom }}</h5> <!-- mb-auto pousse le reste vers le bas -->
+                                <a href="/Entreprise/{{ entreprise.id }}/{{ entreprise.nom|url_encode }}" class="btn btn-primary mt-2">Plus de détails</a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% include 'partials/pagination.twig' with {
+                'current_page': current_page,
+                'total_pages': total_pages
+            } %}
+        </div>
+    </div>
+</div>
+{% endblock body %}
+
+{% block script %}
+  <script src="Script/Homepage.js"></script>
+{% endblock script %}

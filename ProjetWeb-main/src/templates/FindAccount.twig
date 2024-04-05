@@ -1,0 +1,31 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Trouver un compte{% endblock %}
+
+{% block body %}
+    <div class="container mt-4" id="users-container">
+        <div class="row">
+            {% for user in users %}
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ user.nom }} {{ user.prenom }}</h5>
+                            <p class="card-text">Statut: {{ user.type }}</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="/Compte/Profil/{{ user.id }}/{{ user.nom|url_encode }}-{{ user.prenom|url_encode }}" class="btn btn-primary">Afficher le profil</a>
+                        </div>
+                    </div>
+                </div>
+            {% else %}
+                <p>Aucun compte utilisateur trouvé.</p>
+            {% endfor %}
+        </div>
+    </div> {% include 'partials/pagination.twig' with {
+    'current_page': current_page,
+    'total_pages': total_pages
+} %}
+
+
+{% endblock %}
+

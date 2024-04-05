@@ -1,0 +1,159 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Creer une entreprise{% endblock title %}
+
+
+{% block body %}
+<form id="CreateCompany_Form" action="{{ url_for('Creer-une-entreprise') }}" method="POST" enctype="multipart/form-data">
+    <div  style=" height: 40px" class="card border-0"></div>
+        <div class="container">
+            <div  style=" height: 40px" class="card border-0"></div>
+            <div class="row align-items-center">
+                <div class="col-12">
+                    <p class="fs-1 text-center mt-5 mb-5">Créer une entreprise</p>
+                </div>
+                <div class="container">
+                    <div class="col-12 col-sm-6">
+                        <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3" id="successMessage" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="col-12 col-sm-6">
+                        <div  class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" id="errorMessage" style="display: none;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div style="background-color: #28587B;height: 5px" class="card"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="Name_Company" placeholder="Nom de l'entreprise" aria-label="Nom de l'entreprise" id="Name_Company">
+                    <input type="hidden" name="DelCompany" value="0">
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="Sector" placeholder="Secteur d'activité" aria-label="Secteur d'activité" id="Sector">
+                </div>
+            </div>
+        </div>
+
+
+        <div  class="container">
+            <div class="row  ">
+                <div class="col  ">
+                    <div  style="background-color: #28587B;height: 5px" class="card ">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  class="container ">
+            <div class="row  align-items-center">
+                <div class="col-12 ">
+                    <div class="custom-file">
+                        <label class="custom-file-label  text-decoration-underline" for="customFile">Logo de l'entreprise :</label>
+                        <input class="form-control border-dark mb-2" type="file" id="customFile" name="companyLogo" lang="fr">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div  class="container">
+            <div class="row  ">
+                <div class="col  ">
+                    <div  style="background-color: #28587B; height: 5px" class="card ">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="StreetNumber" placeholder="Numero de la rue" aria-label="Numero de la rue" id="StreetNumber">
+                    <input type="hidden" name="DelLocation" value="0">
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="StreetName" placeholder="Nom de la rue" aria-label="Nom de la rue" id="StreetName">
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="City" placeholder="Ville" aria-label="Ville" id="City">
+                </div>
+
+                <div class="col-12 col-sm-6">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="Zipcode" placeholder="Code postal" aria-label="Code postal" id="Zipcode">
+                </div>
+            </div>
+        </div>
+
+        <div  class="container ">
+            <div class="row  align-items-center">
+                <div class="col-12 col-sm-12">
+                    <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" name="AddLocation" placeholder="Complément d'adresse (facultatif)" aria-label="Complément d'adresse (facultatif)" id="AddLocation">
+                </div>
+            </div>
+        </div>
+
+    <div  class="container ">
+        <div class="row ">
+            <div class="col ">
+                <div  style="background-color: #28587B; height: 5px" class="card ">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <button type="button" class="btn btn-outline-secondary w-100 rounded-pill mt-2 mb-2" id="custom">Ajouter une adresse supplémentaire</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="additionalAddressContainer">
+    </div>
+
+    <div  class="container ">
+        <div class="row ">
+            <div class="col ">
+                <div  style="background-color: #28587B; height: 5px" class="card ">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="container ">
+        <div class="row">
+            <div class="col-4">
+                <button  style="background-color: #28587B"  type="button" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 btn-padding-end" id="Cancel_Btn">Annuler</button>
+            </div>
+            <div class="col-4"></div>
+            <div class="col-4">
+                <button style="background-color: #28587B" type="submit" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 " id="Submit_Btn">Creer</button>
+            </div>
+        </div>
+    </div>
+    <div  style=" height: 100px" class="card border-0"></div>
+</form>
+{% endblock body %}
+
+{% block script %}
+    <script src="/Script/CreateCompany.js"></script>
+{% endblock script %}

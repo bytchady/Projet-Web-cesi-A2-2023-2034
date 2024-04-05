@@ -1,0 +1,74 @@
+{% extends 'partials/Base.twig' %}
+{% import 'partials/Card.twig' as card %}
+
+{% block title %}Statistiques Offre{% endblock title %}
+
+{% block body %}
+    <style>
+        #myChart1, #myChart2 ,#myChart3, #myChart4 {
+            width: 400px;
+            height: 300px;
+        }
+    </style>
+    <div class="container">
+        <div style="height: 15px" class="card border-0"></div>
+        <div class="row align-items-center">
+            <div class="col-12">
+                <p class="fs-1 text-center mt-5 mb-2">Statistiques des Offres</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div style="background-color: #28587B;height: 4px" class="card"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12 ">
+                <p class="text-start mt-3 text-decoration-underline">le top 3  des offres mises en wish list : </p>
+            </div>
+        </div>
+        <div class="row  mb-2">
+            <div class="col-12 col-lg-6 ">
+                {{ card.content('images/LogoEntreprise/google.png', 'Card Title', 'Card Description', 10) }}
+                {{ card.content('../../public/Bootstrap/images/LogoEntreprise/Apple.png', 'Card Title', 'Card Description', 10) }}
+                {{ card.content('../../public/Bootstrap/images/LogoEntreprise/Amazon.png', 'Card Title', 'Card Description', 10) }}
+            </div>
+            <div class="col-12 col-lg-6 mb-3 mt-3">
+                <canvas id="myChart1"></canvas>
+            </div>
+        </div>
+        <div class="row  mb-2">
+            <div class=" mt-3col-12 col-md-6 col-lg-4">
+                <canvas id="myChart2"></canvas>
+            </div>
+            <div class=" mt-3 col-12 col-md-6 col-lg-4">
+                <canvas id="myChart3"></canvas>
+            </div>
+            <div class=" mt-3 col-12 col-md-12 col-lg-4">
+                <canvas id="myChart4"></canvas>
+            </div>
+        </div>
+        <div style="height: 40px" class="card border-0"></div>
+    </div>
+
+
+{% endblock body %}
+
+    {% block script %}
+        <script>
+            {#const labels = {{ labels|raw }};#}
+            {#const values = {{ values|raw }};#}
+            {#const values1 = {{ values1|raw }};#}
+            {#const labels1 = {{ labels1|raw }};#}
+            {#const values2 = {{ values2|raw }};#}
+            {#const labels2 = {{ labels2|raw }};#}
+            const labels3 = {{ labels3|raw }};
+            const values3= {{ values3|raw }};
+
+            console.log(labels3);
+            console.log(values3);
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/Script/StatOffer.js"></script>
+    {% endblock script %}

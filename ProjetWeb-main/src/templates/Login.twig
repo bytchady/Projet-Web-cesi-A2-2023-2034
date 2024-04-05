@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Bootstrap/bootstrap.min.css">
+    <link rel="shortcut icon" type="image/x-icon" href="Bootstrap/images/Logo.ico">
+    <title>Authentifier</title>
+</head>
+<body>
+<form id="Login_Form" action="{{ url_for('Connection') }}" method="POST">
+    <div class="container  flex-column align-items-center">
+        <div  style=" height: 100px" class="card border-0"></div>
+        <div style="background-color: #f1f2f3" class="card border-0 shadow">
+            <div  style=" height: 100px;background-color: #f1f2f3" class="card border-0"></div>
+            <div class="row  align-items-center">
+                <div class="col-4 col-sm-5"></div>
+                <div class="col-4 col-sm-2">
+                    <figure class="figure">
+                        <img src="Bootstrap/images/logo_noir.png" class=" img-fluid text-start" alt="logo">
+                    </figure>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 mb-1">
+                    <h1  class=" fs-1 text-center">Se Connecter</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4"></div>
+                <div class="col-10  col-sm-8 col-lg-6 col-xl-4">
+                    <input class="form-control rounded-pill mt-2 mb-2 border-dark" type="text" name="Login"  placeholder="Identifiant" aria-label="Identifiant" id="Login">
+                </div>
+                <div class="col-1 col-sm-2 col-lg-3 col-xl-4"></div>
+            </div>
+
+            <div class="row ">
+                <div class="col-1 col-sm-2 col-lg-3 col-xl-4"></div>
+                <div class="col-10 col-sm-8 col-lg-6 col-xl-4">
+                    <input class="form-control rounded-pill mt-4 mb-2 border-dark" type="password" name="Password"  placeholder="Mot de passe" aria-label="Password" id="Password">
+                </div>
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4" >
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4"></div>
+                <div class="col-10 col-sm-8 col-lg-6 col-xl-4">
+                    <div class="form-check">
+                        <label class="form-check-label" for="ShowPassword">
+                            <input class="form-check-input" type="checkbox" id="ShowPassword" > Afficher le mot de passe
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row ">
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4"></div>
+                <div class="col-10 col-sm-8 col-lg-6 col-xl-4">
+                    <div id="errorMessage" style="display: none; color: crimson;"></div>
+                </div>
+            </div>
+
+
+            <div class="row align-items-center">
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4"></div>
+                <div class="col-10 col-sm-8 col-lg-6 col-xl-4 pb-3">
+                    <button  style="background-color: #28587B"  type="submit" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 " id="Submit_Btn" >Se Connecter</button>
+                </div>
+                <div class="col-1  col-sm-2 col-lg-3 col-xl-4"></div>
+            </div>
+            <div  style=" height: 100px;background-color: #f1f2f3" class="card border-0"></div>
+        </div>
+    </div>
+    <script src="Script/Login.js"></script>
+</form>
+</body>
+</html>

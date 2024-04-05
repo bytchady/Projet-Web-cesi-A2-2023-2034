@@ -1,0 +1,62 @@
+{% extends 'partials/Base.twig' %}
+{% import 'partials/Card.twig' as card %}
+
+{% block title %}Statistiques Entreprise{% endblock title %}
+
+{% block body %}
+<style>
+    #myChart1, #myChart2 {
+        width: 400px;
+        height: 300px;
+    }
+</style>
+<div class="container">
+    <div style="height: 15px" class="card border-0"></div>
+    <div class="row align-items-center">
+        <div class="col-12">
+            <p class="fs-1 text-center mt-5 mb-2">Statistiques Entreprise</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div style="background-color: #28587B;height: 4px" class="card"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 ">
+            <p class="text-start mt-3 text-decoration-underline">Le top 3 offre les plus populaires : </p>
+        </div>
+    </div>
+    <div class="row  mb-2">
+        <div class="col-12 col-lg-6 ">
+            {{ card.content('../../public/img/LogoEntreprise/google.png', 'Card Title', 'Card Description', 10) }}
+            {{ card.content('../../public/img/LogoEntreprise/Apple.png', 'Card Title', 'Card Description', 10) }}
+            {{ card.content('../../public/img/LogoEntreprise/Amazon.png', 'Card Title', 'Card Description', 10) }}
+        </div>
+        <div class="col-12 col-lg-6 mb-3 mt-3">
+            <canvas id="myChart1"></canvas>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-12">
+            <canvas id="myChart2"></canvas>
+        </div>
+    </div>
+    <div style="height: 25px" class="card border-0"></div>
+</div>
+
+
+    {% endblock body %}
+
+    {% block script %}
+        <script>
+            const labels = {{ labels|raw }};
+            const values = {{ values|raw }};
+            const values1 = {{ values1|raw }};
+            const labels1 = {{ labels1|raw }};
+
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="/Script/StatCompany.js"></script>
+
+    {% endblock script %}

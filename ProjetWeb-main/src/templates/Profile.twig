@@ -1,0 +1,161 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Profile pilote{% endblock title %}
+
+{% block body %}
+<div  style=" height: 40px" class="card border-0"></div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <p class="fs-4 fw-bold">{{ userType }}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            {% if userTypeCookie != 'Etudiant' %}
+            <div class=" col">
+                <a href="/Compte/Modifier/{{ id }}/{{ nom|url_encode }}-{{ prenom|url_encode }}" class="btn btn-primary">Voir les statistiques</a>
+            </div>
+
+            <div class="col text-end">
+                <a href="/Compte/Modifier/{{ id }}/{{ nom|url_encode }}-{{ prenom|url_encode }}" class="btn btn-primary">Modifier</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <div  style=" height: 20px" class="card border-0"></div>
+
+
+    <div  class="container">
+    <div class="row  ">
+        <div class="col  ">
+            <div  style="background-color: #28587B;height: 5px" class="card ">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div  class="container ">
+    <div class="row  align-items-center">
+        <div class="col-12 col-sm-6">
+            <div type="text" class="form-control rounded-pill mt-2 mb-2 border-dark">{{ prenom }}</div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div type="text" class="form-control rounded-pill mt-2 mb-2 border-dark">{{ nom }}</div>
+        </div>
+    </div>
+</div>
+
+<div  class="container">
+    <div class="row  ">
+        <div class="col  ">
+            <div  style="background-color: #28587B;height: 5px" class="card "></div>
+        </div>
+    </div>
+</div>
+
+<div  class="container ">
+    <div class="row  align-items-center">
+        <div class="col-12 col-sm-6">
+            <div type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" >{{ promotion }}</div>
+        </div>
+
+        <div class="col-12 col-sm-6">
+            <div type="text" class="form-control rounded-pill mt-2 mb-2 border-dark">{{ centre }}</div>
+        </div>
+    </div>
+</div>
+
+<div  class="container">
+    <div class="row  ">
+        <div class="col  ">
+            <div  style="background-color: #28587B;height: 5px" class="card  mb-1"></div>
+        </div>
+    </div>
+</div>
+
+{% if userType != 'Pilote' %}
+    <div  class="container mt-5 ">
+        <div class="row  align-items-center">
+            <div class="col-12  ">
+                <div style="background-color: #28587B" class="card ">
+                    <h5 class="card-header text-center text-light">Historique de candidature</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="container mt-3">
+        <div style="background-color: #9FB4C7" class="card mb-3 border-dark" >
+            <div class="row align-items-center">
+                <div class=" col-4 col-sm-3 col-md-2 col-xl-1  mt-3 mb-3  ">
+                    <div style="height: 100px;width: 100px" class="card border-dark ms-3  ">
+                    <img src="/Bootstrap/images/bxl-tiktok%20(1).svg" class="img-fluid rounded-start border-dark " alt="test">
+                    </div>
+                </div>
+
+                <div class="col-8 col-sm-9  col-md-8 col-xl-11 mb-3  ">
+                    <div class="card-body pe-5 ">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class=" col-6 "></div>
+                <div class="col-5 ">
+                   <button style="background-color: #28587B" type="button" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 me-5 border-0">Evaluer L'offre</button>
+                </div>
+                <div class=" col-1 "></div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="container mt-5 ">
+        <div class="row  align-items-center">
+            <div class="col-12  ">
+                <div style="background-color: #28587B" class="card ">
+                    <h5 class="card-header text-center text-light">Liste d'envie</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div  class="container mt-3">
+        <div style="background-color: #9FB4C7" class="card mb-3 border-dark" >
+            <div class="row align-items-center">
+                <div class=" col-4 col-sm-3 col-md-2 col-xl-1  mt-3 mb-3  ">
+                    <div style="height: 100px;width: 100px" class="card border-dark ms-3  ">
+                        <img src="/Bootstrap/images/bxl-tiktok%20(1).svg" class="img-fluid rounded-start border-dark " alt="test">
+                    </div>
+                </div>
+                <div class="col-8 col-sm-9  col-md-8 col-xl-11 mb-3  ">
+                    <div class="card-body pe-5 ">
+                        <h5 class="card-title">Card title</h5>
+                        <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class=" col-5  col-sm-6"></div>
+                <div class="col-2 col-sm-1 mt-3 me-2">
+                <button type="button" class="btn "><img src="/Bootstrap/images/bx-trash.svg" alt="Bootstrap"></button>
+                </div>
+                <div class="col-4 ">
+                    <button style="background-color: #28587B" type="button" class="btn btn-outline-light w-100 rounded-pill mt-3 mb-2 me-5 border-0">Postuler</button>
+                </div>
+                <div class=" col-1 "></div>
+            </div>
+        </div>
+    </div>
+
+    <div  style=" height: 40px" class="card border-0"></div>
+
+{% endif %}
+{% endblock body %}

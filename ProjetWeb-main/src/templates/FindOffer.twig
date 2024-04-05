@@ -1,0 +1,124 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Offres{% endblock title %}
+
+{% block body %}
+    <div class="container mt-5 mb-3">
+    <div class="row">
+        <div class="col-md-auto">
+            <strong>Liste des offres</strong>
+        </div>
+    </div>
+</div>
+{% for offre in offres %}
+    <form id="applyForm{{ offre.id }}" class="applyForm" action="{{ url_for('Postuler', {'offerId': offre.id}) }}" method="POST" enctype="multipart/form-data">
+    <div class="accordion mb-3" id="accordionExample">
+        <div class="container" class="accordion-item">
+        <h2 class="accordion-header border" id="heading{{ offre.id }}">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ offre.id }}" aria-expanded="false" aria-controls="collapse{{ offre.id }}">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-auto">
+                            <img class="custom-image" src="{{ offre.companyLogo ? offre.companyLogo : '/Bootstrap/images/LogoEntreprise/Logo-par-defaut.jpg' }}"  alt="Logo de l'entreprise">
+                        </div>
+                        <div class="col-md-auto">
+                            <strong>{{ offre.description }}</strong><br/>
+                            {{ offre.companyName }}<br/>
+                            {{ offre.fullAddress }}<br/>
+                        </div>
+                    </div>
+                </div>
+            </button>
+        </h2>
+        <div id="collapse{{ offre.id }}" class="accordion-collapse collapse"
+             aria-labelledby="heading{{ offre.id }}" data-bs-parent="#accordionExample">
+        <div class="accordion-body row">
+            <div class="accordion-body col-7">
+                    <strong>Promotion concernée : </strong>{{ offre.promotion }}
+                </div>
+                <div class="accordion-body col-7">
+                    <strong>Durée : </strong>{{ offre.duration }}
+                </div>
+                <div class="accordion-body col-7">
+                    <strong>Remunération : </strong>{{ offre.remuneration }}€/mois
+                </div>
+                <div class="accordion-body col-7">
+                    <strong>Début de l'offre : </strong>{{ offre.date }}
+                </div>
+                <div class="accordion-body col-7">
+                    <strong>Places disponibles : </strong>{{ offre.place }}
+                </div>
+                <div class="accordion-body col-7">
+                    <strong>Compétences requises : </strong>
+                    {% for skill in offre.skills %}
+                        {{ skill }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="accordion-body col-5 text-end">
+                        <script src="/Script/Heart.js"></script>
+                        <img class="img-fluid" src="/Bootstrap/images/bx-heart.svg" id="heart"
+                             onclick="toggleHeart(event, heart)">
+                    </div>
+                    <div class="container mt-3 m-lg-2">
+                        <div class="col-12 col-sm-6">
+                            <div class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3" id="successMessage{{ offre.id }}" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="container mt-3 m-lg-2">
+                        <div class="col-12 col-sm-6">
+                            <div  class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" id="errorMessage{{ offre.id }}" style="display: none;"></div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="Nom" class="form-label">Nom</label>
+                        <input type="text" class="form-control" id="Nom" name="Nom" placeholder="Nom" aria-label="Nom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Prenom" class="form-label">Prenom</label>
+                        <input type="text" class="form-control" id="Prenom" name="Prenom" placeholder="Prenom" aria-label="Prenom">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Login" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="Login" name="Login" placeholder="Nom d'utilisateur" aria-label="Nom d'utilisateur">
+                    </div>
+                    <div class="mb-3">
+                        <label for="CV" class="form-label">Insérer un CV</label>
+                        <input class="form-control" type="file" id="CV" name="CV">
+                    </div>
+                    <div class="mb-3">
+                        <label for="Motivation" class="form-label">Lettre de motivation</label>
+                        <input class="form-control" type="file" id="Motivation" name="Motivation">
+                    </div>
+
+                    <div class="container text-center">
+                        <div class="row">
+                            {% if userType != 'Etudiant' %}
+                            <div class="col">
+                                <a href="/Offre/Modifier/{{ offre.id }}" style="background-color:#28587B;" class="btn btn-outline-light">Modifier</a>
+                            </div>
+                            {% endif %}
+                            <div class="col">
+                                <button type="submit"  style="background-color:#28587B;" class="btn btn-outline-light apply-btn" data-offer-id="{{ offre.id }}">Postuler
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    </div>
+    </form>
+
+{% endfor %}
+
+    <div style=" height: 40px" class="card border-0"></div>
+{% include 'partials/pagination.twig' with {
+        'current_page': current_page,
+        'total_pages': total_pages
+    } %}
+{% endblock body %}
+
+{% block script %}
+    <script src="/Script/FindOffer.js"></script>
+{% endblock script %}

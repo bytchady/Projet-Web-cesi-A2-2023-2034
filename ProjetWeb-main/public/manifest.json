@@ -1,0 +1,16 @@
+{
+  "name": "FindMe",
+  "short_name": "FM",
+  "start_url": "http://findme.fr/Page-d-accueil?page=1",
+  "display": "standalone",
+  "background_color": "white",
+  "theme_color": "white",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "Bootstrap/images/cropped.jpg",
+      "type": "image/png",
+      "sizes": "192x192"
+    }
+  ]
+}

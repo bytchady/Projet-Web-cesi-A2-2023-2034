@@ -1,0 +1,158 @@
+{% extends 'partials/Base.twig' %}
+
+{% block title %}Modifier une entreprise{% endblock title %}
+
+
+
+{% block body %}
+<form id="EditCompany_Form" action="{{ url_for('Modifier-une-entreprise', {'id': company.getIdCompany(), 'name': company.getNameCompany()}) }}" method="POST">
+<div style=" height: 40px" class="card border-0"></div>
+<div class="container ">
+    <div class="row align-items-center   ">
+        <div class="col-12">
+            <p class="fs-1 text-center mt-5 mb-5">Modifier une entreprise</p>
+        </div>
+    </div>
+</div>
+
+
+    <div class="container">
+        <div class="row align-items-start">
+            <div class="col-4 col-md-3 mb-3">
+                <img src="{{ company.getLogoPath() is not null ? company.getLogoPath : '/Bootstrap/images/LogoEntreprise/Logo-par-defaut.jpg' }}" class="img-fluid rounded-start" alt="{{ entreprise.name }}">
+            </div>
+            <div class="col-5 col-md-5">
+                <div id="successMessage" class="p-3 text-success-emphasis bg-success-subtle border border-success-subtle rounded-3" style="display: none;"></div>
+                <div id="errorMessage" class="p-3 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-3" style="display: none;"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div style="background-color: #28587B;height: 5px" class="card">
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="container ">
+    <div class="row  align-items-center">
+        <div class="col-6 ">
+            <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="nom de l'entreprise" aria-label="nom de l'entreprise" id="Name_Company" name="Name_Company" value="{{ company.getNameCompany() }}">
+        </div>
+        <div class="col-6 ">
+            <input type="text" class="form-control rounded-pill mt-2 mb-2 border-dark" placeholder="Secteur activité" aria-label="Secteur activité" id="Business_Sector" name="Business_Sector" value="{{ company.getBusinessSector() }}">
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row  ">
+        <div class="col  ">
+            <div style="background-color: #28587B;height: 5px" class="card ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ">
+    <div class="row  align-items-center">
+        <div class="col-12 ">
+            <div class="custom-file">
+                <label class="custom-file-label  text-decoration-underline" for="customFile">Nouveau logo :</label>
+                <input class="form-control   border-dark  mb-2" type="file" id="customFile" name="companyLogo" lang="fr">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container ">
+    <div class="row ">
+        <div class="col ">
+            <div style="background-color: #28587B; height: 5px" class="card ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+<div class="row ">
+    <div class="col-6 mt-2 ">
+        <label class="custom-file-label  text-decoration-underline">Adresses existantes: </label>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col">
+        <div class="card overflow-auto mt-1 mb-2" style="height: 300px">
+            <table class="table  table-hover text-center mb-2">
+                <thead>
+                <tr>
+                    <th scope="col">Numero de rue</th>
+                    <th scope="col">Nom de rue</th>
+                    <th scope="col">Ville</th>
+                    <th scope="col">Code postal</th>
+                    <th scope="col">Complement d'adresse</th>
+                </tr>
+                </thead>
+
+                <tbody class="table-group-divider">
+                {% for adresse in adresses %}
+                    <tr id="adresse-row-{{ adresse.getIdLocation() }}"  data-bs-toggle="modal" data-bs-target="#orderModal">
+                        <td> {{ adresse.getNumStreet() }}</td>
+                        <td>{{ adresse.getNameStreet() }}</td>
+                        <td>{{ adresse.getNameCity() }}</td>
+                        <td> {{ adresse.getZipCode() }}</td>
+                        <td> {{ adresse.getAddAdr() }}</td>
+                        <td>
+                            <button class="btn btn-secondary delete-location-btn" type="button" data-id="{{ adresse.getIdLocation() }}">
+                                <img src="/Bootstrap/images/bx-trash.svg" alt="supprimer">
+                            </button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <button type="button" class="btn btn-outline-secondary w-100 rounded-pill mt-2 mb-2" id="custom">Ajouter des adresses supplémentaires</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="additionalAddressContainer"></div>
+    </div>
+</div>
+<div class="container ">
+    <div class="row ">
+        <div class="col ">
+            <div style="background-color: #28587B; height: 5px" class="card ">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container ">
+    <div class="row mt-2 ">
+        <div class="col-4 ">
+            <button style="background-color: #28587B" type="button" class="btn btn-outline-light  rounded-pill " id="Cancel_Btn">
+                Annuler
+            </button>
+        </div>
+        <div class="col-4 text-end">
+            <button style="background-color:red" type="button" class="btn btn-outline-light  rounded-pill" id="Delete_Btn">
+                Supprimer
+            </button>
+        </div>
+        <div class="col-4 text-end">
+            <button style="background-color: #28587B" type="button" class="btn btn-outline-light  rounded-pill " id="Submit_Btn">
+                Modifier
+            </button>
+        </div>
+    </div>
+</div>
+<div style=" height: 100px" class="card border-0"></div>
+</form>
+{% endblock body %}
+
+{% block script %}
+    <script src="/Script/EditCompany.js"></script>
+{% endblock script %}
+
